@@ -3,6 +3,10 @@
 
 # nginx web server
 
+# Create python version of package.json
+- pip freeze > requirements.txt
+- pip install -r requirements.txt (when installing packages)
+
 # To make new python project
 python3 -m venv <project-name>
 
