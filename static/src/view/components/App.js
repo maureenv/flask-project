@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { NavLink, BrowserRouter as Router, Route } from "react-router-dom"
 import { Redirect, Switch } from 'react-router'
-import Blog from './blog/blog'
-import Home from './blog/home'
+import Blog from './pages/blog'
+import Home from './pages/home'
+import Login from './pages/login'
 
 class App extends Component {
   render() {
@@ -11,6 +12,7 @@ class App extends Component {
           <NavLink to="/"> Go Home </NavLink>
           <Switch>
             <Route path="/blog" component={ Blog }/>
+            <Route path="/login" component={ Login }/>
             <Route exact path="/" component={ Home }/>
           </Switch>
       </div>

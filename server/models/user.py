@@ -1,4 +1,6 @@
-from server.common.database import Database
+# import sys
+# print(sys.path)
+from ..common.database import Database
 from flask import Flask, session
 from flask.ext.session import Session
 from server.models.blog import Blog

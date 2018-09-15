@@ -9,8 +9,9 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <div> Home page </div>
-        <NavLink to="/blog"> View Blogs </NavLink>
+        <h1> Home page </h1>
+        <div><NavLink to="/login"> Login </NavLink></div>
+        <div><NavLink to="/blog"> View Blogs </NavLink></div>
       </div>
     )
   }
