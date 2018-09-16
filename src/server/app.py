@@ -28,5 +28,17 @@ def login_user():
         session['email'] = None
 
     email = session['email']
-    #return render_template("index.html", email=session['email'])
+    #make sure to jsonify your data in you response
+    return jsonify(email)
+
+@app.route('/register', methods=['POST'])
+def register_user():
+    data = request.get_json()
+    email = data['registerEmail']
+    password = data['registerPassword']
+
+    User.register(email, password)
+
+    email = session['registerEmail']
+    #make sure to jsonify your data in you response
     return jsonify(email)
