@@ -55,6 +55,11 @@ ______________________________________________________________
 - show collections // blogs, posts (collections are basically tables, but in json data format)
 - db.students.find({}).pretty() // this will find all the data in a database
 
+# Create new Collection
+- use <database name>
+- db.<new collection name>.find({})
+- db.<new collection name>.insert({ "email": "test@test.com", "password":"password"})
+
 ## Insert data into database
 - use your database (db will refer to database you're on, students is the collection and insert is the data to insert)
 - db.students.insert({"name":"jose", "mark": 99})

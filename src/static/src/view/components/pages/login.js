@@ -8,13 +8,13 @@ class Login extends Component {
   }
   render() {
     return (
-      <div>
+      <form id="login-form" action="/login">
         <div> Log In </div>
-        <label> Email </label><input type="text" id="email"/>
-        <label> Password </label><input type="password" id="password"/>
+        <label> Email </label><input type="text" id="email" name="email"/>
+        <label> Password </label><input type="password" id="password" name="password"/>
 
         <input type="submit" id="submit-button"/>
-      </div>
+      </form>
     )
   }
 }
