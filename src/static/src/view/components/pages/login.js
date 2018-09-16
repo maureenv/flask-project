@@ -10,6 +10,15 @@ class Login extends Component {
     registerEmail: '',
     session: null,
     error: null,
+    blogs: [],
+  }
+
+  getBlogs = () => {
+    console.log('going to get blogs')
+    fetch('/blogs')
+    .then(response => response.json())
+    .then(data => console.log(data, 'the data'))
+    .catch((err)=> console.log(err, 'the error'))
   }
 
   submitLogin = e => {
@@ -22,7 +31,7 @@ class Login extends Component {
       headers: {'Content-Type': 'application/json'},
     })
     .then(response => response.json())
-    .then(data => this.setState({ session: data }))
+    .then(data => this.setState({ session: data }), this.getBlogs())
     .catch((err)=> console.log(err, 'the error'))
   }
 
@@ -45,7 +54,7 @@ class Login extends Component {
       email,
       session
     } = this.state
-    console.log(session, 'your session')
+
     return (
       <div>
         <h2> Log In </h2>

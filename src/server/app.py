@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, jsonify
 from models.user import User
 from common.database import Database
+import json
 # run export FLASK_ENV=development in terminal before python run.py to see flask debugger messages
 
 app = Flask(__name__, static_url_path='', static_folder="../static/build", template_folder="../static/build")
@@ -39,6 +40,19 @@ def register_user():
 
     User.register(email, password)
 
-    email = session['registerEmail']
+    email = session['email']
     #make sure to jsonify your data in you response
     return jsonify(email)
+
+@app.route('/blogs/<string:user_id>') #user id is assigned when creating a user
+@app.route('/blogs')
+def user_blogs(user_id=None):
+    if user_id is not None:
+        user = User.get_by_id(user_id)
+    else:
+        user = User.get_by_email(session['email'])
+
+    blogs = user.get_blogs()
+    print([blog for blog in blogs], 'the blogs')
+    blogs = blogs #pass in a blogs variable with the blogs content
+    return jsonify(blogs)

@@ -5,12 +5,13 @@ from .post import Post
 
 class Blog(object):
     # mongodb by default will give each item an _id so in order to overwrite it we will create our own _id in __init__
-    def __init__(self, author, title, description, author_id, _id=None):
+    def __init__(self, author, title, description, author_id, id, _id=None,):
         self.author = author
         self.author_id = author_id
         self.title = title
         self.description = description
         self._id = uuid.uuid4().hex if id is None else id
+        self.id = id
 
     def new_post(self, title, content, date=datetime.datetime.utcnow()): #date gets a default value so the date code below is no longer needed
         # if date == "":

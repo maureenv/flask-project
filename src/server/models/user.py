@@ -5,6 +5,7 @@ from flask import Flask, session
 #from flask.ext.session import Session
 from .blog import Blog
 import datetime
+import uuid
 # In flask we don't have to do any work with cookies because Flask does the cookies for us. Whenever user access's our application, flask sends them a cookie that is secure and uniquely identifies their session. So once an email is passed into a session, flask already knows that a user's cookie matches this session.
 
 
