@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, jsonify
 from models.user import User
 from common.database import Database
 # run export FLASK_ENV=development in terminal before python run.py to see flask debugger messages
@@ -18,14 +18,15 @@ def initialize_database():
 @app.route('/login', methods=['POST'])
 def login_user():
     # request is something incoming to our application. The data sent front the client will be in the request.form dictionary
-    print(request.form, '##################### I got a request')
-    email = request.form['email']
-    password = request.form['password']
+    data = request.get_json()
+    email = data['email']
+    password = data['password']
 
     if User.login_valid(email, password):
-        print(email, 'the email')
         User.login(email)
     else: #to erase session so that username and password aren't saved in browser
         session['email'] = None
 
-    return render_template("index.html", email=session['email'])
+    email = session['email']
+    #return render_template("index.html", email=session['email'])
+    return jsonify(email)

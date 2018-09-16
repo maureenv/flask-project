@@ -6,6 +6,7 @@ class Login extends Component {
   state = {
     password: '',
     email: '',
+    session: null,
   }
 
   submit = e => {
@@ -16,15 +17,18 @@ class Login extends Component {
     fetch('/login', {
       method: "POST",
       body: JSON.stringify(data),
-      headers: new Headers(),
+      headers: {'Content-Type': 'application/json'},
     })
     .then(response => response.json())
-    .then(data => console.log(data, 'the data in response'))
+    .then(data => this.setState({ session: data }))
     .catch((err)=> console.log(err, 'the error'))
   }
 
   render() {
-          /*<form id="login-form" action="/login" method="post">*/
+    const {
+      session
+    } = this.state
+    console.log(session, 'your session')
     return (
       <div>
         <div> Log In </div>
@@ -32,6 +36,7 @@ class Login extends Component {
         <label> Password </label><input type="password" id="password" onChange={ e => this.setState({ password: e.target.value })} name="password"/>
 
         <button onClick={ this.submit }>Submit</button>
+        <p> Your email is ${ session } </p>
       </div>
     )
   }
