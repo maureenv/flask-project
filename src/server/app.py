@@ -53,5 +53,6 @@ def user_blogs(user_id=None):
         user = User.get_by_email(session['email'])
 
     blogs = user.get_blogs()
+    print([blog.json() for blog in blogs])
     blogs = blogs #pass in a blogs variable with the blogs content
     return jsonify([blog.json() for blog in blogs])
