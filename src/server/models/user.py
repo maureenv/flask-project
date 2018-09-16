@@ -98,7 +98,7 @@ class User(object): #author
     def json(self):
         return {
             "email": self.email,
-            "_id": self._id,
+            "_id": str(self._id),
             "password": self.password
             # shouldn't pass password here since sending passwords over a network is never safe
             # if this data is being sent between user and application NO password

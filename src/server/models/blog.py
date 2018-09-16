@@ -38,7 +38,7 @@ class Blog(object):
             'author_id': self.author_id,
             'title': self.title,
             'description': self.description,
-            '_id': self._id
+            '_id': str(self._id)
         }
 
     # here we won't have access to self because object won't be created, so just pass in id of what we're looking for
