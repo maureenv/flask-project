@@ -4,6 +4,11 @@
 
 # nginx web server
 
+# Flask debug mode
+run in terminal - export FLASK_ENV=development
+                - python run.py
+
+
 # React
 1. Make sure to install yarn in static folder
 2. "yarn build" when I want to rebuild my site and then do python run.py to view the site

@@ -8,7 +8,7 @@ class Login extends Component {
   }
   render() {
     return (
-      <form id="login-form" action="/login">
+      <form id="login-form" action="/login" method="post">
         <div> Log In </div>
         <label> Email </label><input type="text" id="email" name="email"/>
         <label> Password </label><input type="password" id="password" name="password"/>
