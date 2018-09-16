@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 print("I work")
-from models.user import User
+from .models.user import User
 
 app = Flask(__name__, static_url_path='', static_folder="../static/build", template_folder="../static/build")
 

@@ -3,7 +3,7 @@
 import uuid
 import datetime
 
-from server.common.database import Database
+from ..common.database import Database
 
 
 class Post(object):

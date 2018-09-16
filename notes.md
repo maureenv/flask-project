@@ -4,6 +4,10 @@
 
 # nginx web server
 
+# React
+1. Make sure to install yarn in static folder
+2. "yarn build" when I want to rebuild my site and then do python run.py to view the site
+
 # Create python version of package.json
 - pip freeze > requirements.txt
 - pip install -r requirements.txt (when installing packages)

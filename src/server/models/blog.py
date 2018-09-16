@@ -1,7 +1,7 @@
 import uuid
 import datetime
-from server.common.database import Database
-from server.models.post import Post
+from ..common.database import Database
+from .post import Post
 
 class Blog(object):
     # mongodb by default will give each item an _id so in order to overwrite it we will create our own _id in __init__

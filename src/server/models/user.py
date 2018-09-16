@@ -3,7 +3,7 @@
 from ..common.database import Database
 from flask import Flask, session
 #from flask.ext.session import Session
-from server.models.blog import Blog
+from .blog import Blog
 import datetime
 # In flask we don't have to do any work with cookies because Flask does the cookies for us. Whenever user access's our application, flask sends them a cookie that is secure and uniquely identifies their session. So once an email is passed into a session, flask already knows that a user's cookie matches this session.
 
