@@ -17,7 +17,7 @@ class Login extends Component {
     console.log('going to get blogs')
     fetch('/blogs')
     .then(response => response.json())
-    .then(data => console.log(data, 'the data'))
+    .then(data => this.setState({ blogs: data }))
     .catch((err)=> console.log(err, 'the error'))
   }
 
@@ -52,9 +52,10 @@ class Login extends Component {
   render() {
     const {
       email,
-      session
+      session,
+      blogs
     } = this.state
-
+console.log(blogs, 'the blogs in state')
     return (
       <div>
         <h2> Log In </h2>
@@ -62,7 +63,6 @@ class Login extends Component {
         <label> Password </label><input type="password" id="password" onChange={ e => this.setState({ password: e.target.value })} name="password"/>
 
         <button onClick={ this.submitLogin }>Submit</button>
-        { session && <p> Your email is { session } </p> }
 
         {/* FOR REGISTERING */}
         <h2> No password? Register Here </h2>
@@ -70,6 +70,25 @@ class Login extends Component {
         <label> Password </label><input type="password" id="password" onChange={ e => this.setState({ registerPassword: e.target.value })} name="password"/>
 
         <button onClick={ this.submitRegistration }>Register</button>
+
+        { session &&
+          <div>
+          <h2> Welcome { session } </h2>
+          <p> Here are your blogs </p>
+          { blogs.map( blog => {
+            console.log(blog, 'a single blog')
+            return (
+              <div>
+                <b>{ blog.title }</b>
+                <p>{ blog.author}</p>
+                <p>{ blog.description }</p>
+                <br/>
+              </div>
+            )
+          })
+        }
+        </div>
+      }
       </div>
     )
   }
