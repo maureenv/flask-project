@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, session, jsonify
 from models.user import User
+from models.blog import Blog
 from common.database import Database
 import json
 # run export FLASK_ENV=development in terminal before python run.py to see flask debugger messages
@@ -56,3 +57,10 @@ def user_blogs(user_id=None):
     print([blog.json() for blog in blogs])
     blogs = blogs #pass in a blogs variable with the blogs content
     return jsonify([blog.json() for blog in blogs])
+
+@app.route('/posts/<string:blog_id>')
+def blog_posts(blog_id):
+    blog = Blog.from_mongo(blog_id)
+    posts = blog.get_posts()
+    posts = posts
+    return jsonify([post.json() for post in posts])

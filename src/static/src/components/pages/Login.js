@@ -1,16 +1,29 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 
 class Login extends Component {
-  state = {
-    password: '',
-    email: '',
-    registerPassword: '',
-    registerEmail: '',
-    session: null,
-    error: null,
-    blogs: [],
+  constructor( props ) {
+    super( props )
+
+    this.state = {
+      password: '',
+      email: '',
+      registerPassword: '',
+      registerEmail: '',
+      error: null,
+      blogs: [],
+      user: props.user
+    }
+  }
+
+  componentWillMount() {
+    console.log(this.props, 'the props on mount')
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps, 'the nextprops')
   }
 
   getBlogs = () => {
@@ -31,7 +44,7 @@ class Login extends Component {
       headers: {'Content-Type': 'application/json'},
     })
     .then(response => response.json())
-    .then(data => this.setState({ session: data }), this.getBlogs())
+    .then(data => this.setState({ user: data }), this.getBlogs())
     .catch((err)=> console.log(err, 'the error'))
   }
 
@@ -52,15 +65,15 @@ class Login extends Component {
   render() {
     const {
       email,
-      session,
+      user,
       blogs
     } = this.state
-console.log(blogs, 'the blogs in state')
+    console.log(this.state, 'the state')
     return (
       <div>
         <h2> Log In </h2>
-        <label> Email </label><input type="text" id="email" onChange={ e => this.setState({ email: e.target.value })} name="email"/>
-        <label> Password </label><input type="password" id="password" onChange={ e => this.setState({ password: e.target.value })} name="password"/>
+        <label> Email </label><input type="text" onChange={ e => this.setState({ email: e.target.value })} name="email"/>
+        <label> Password </label><input type="password" onChange={ e => this.setState({ password: e.target.value })} name="password"/>
 
         <button onClick={ this.submitLogin }>Submit</button>
 
@@ -71,9 +84,9 @@ console.log(blogs, 'the blogs in state')
 
         <button onClick={ this.submitRegistration }>Register</button>
 
-        { session &&
+        { user &&
           <div>
-          <h2> Welcome { session } </h2>
+          <h2> Welcome { user } </h2>
           <p> Here are your blogs </p>
           { blogs.map( blog => {
             console.log(blog, 'a single blog')
@@ -92,6 +105,11 @@ console.log(blogs, 'the blogs in state')
       </div>
     )
   }
+}
+
+Login.propTypes = {
+  setUser: PropTypes.func,
+  user: PropTypes.obj,
 }
 
 export default Login

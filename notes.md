@@ -72,3 +72,9 @@ ______________________________________________________________
 ## Remove data
 - db.students.remove({"name":"jose"}) // finds any element that matches this and deletes it
 - db.students.remove({}) // deletes everything in this collection
+
+______________________________________________________________
+# Python Notes
+  - You have to jsonify dictionaries or arrays of dictionaries. Not objects
+  - Classes are templates to create objects
+  - en_de = {"red" : "rot", "green" : "grün", "blue" : "blau", "yellow":"gelb"} (this is a dictionary. It is a list of key value pairs)
