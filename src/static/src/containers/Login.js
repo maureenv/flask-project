@@ -8,11 +8,11 @@ const mapStateToProps = state => {
   return { user }
 }
 
-const mapDispatchToProps = () => {
-  const setUser = user => setUser( user )
+const mapDispatchToProps = dispatch => {
+  //const setUser = user => setUser( user )
 
   return {
-    setUser
+    setUser: user => dispatch(setUser(user))
   }
 }
 

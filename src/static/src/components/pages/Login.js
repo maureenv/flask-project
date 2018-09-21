@@ -32,11 +32,11 @@ class Login extends Component {
     .then(response => response.json())
     .then(data => this.setState({ blogs: data }))
     .catch((err)=> console.log(err, 'the error'))
+    this.props.setUser(this.state.user)
   }
 
   submitLogin = e => {
     e.preventDefault()
-
     const data = this.state
     fetch('/login', {
       method: "POST",
