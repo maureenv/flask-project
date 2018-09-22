@@ -12,16 +12,33 @@ class Blog extends Component {
     console.log('get posts called')
     fetch(`/posts/${ this.props.currentBlog }`)
     .then(response => response.json())
-    .then(data => this.setState({ posts: data }, () => console.log(data, 'the data')))
+    .then(data => this.setState({ posts: data }))
     .catch((err)=> console.log(err, 'the error'))
   }
 
   componentDidMount() {
     this.getPosts()
   }
+
   render() {
+    const {
+      posts
+    } = this.state
+    console.log(posts, 'teh posts in state')
     return (
-      <div> This is my blog { this.props.currentBlog }</div>
+      <div>
+        <h1> My Blog Posts </h1>
+        { posts.map( post => {
+          return (
+            <div>
+              <p>{ post.author }</p>
+              <p>{ post.title }</p>
+              <p>{ post.content }</p>
+              <br/>
+            </div>
+          )
+        })}
+      </div>
     )
   }
 }
