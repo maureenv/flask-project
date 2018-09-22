@@ -3,9 +3,8 @@ import { setBlogs } from '../actions/blog'
 import Blog from '../components/pages/Blog'
 
 const mapStateToProps = state => {
-  const { blogs } = state.blogs
-  console.log(blogs, 'the blogs in container')
-  return { blogs }
+  const { currentBlog } = state.blogs
+  return { currentBlog }
 }
 
 const mapDispatchToProps = dispatch => {

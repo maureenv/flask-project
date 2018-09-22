@@ -1,4 +1,4 @@
-import * as blog from './blogs'
+import * as blog from './blog'
 import * as login from './login'
 
 const actions = ({

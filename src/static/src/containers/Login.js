@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { setUser } from '../actions/login'
-import { setBlogs } from '../actions/blog'
+import { setBlogs, setCurrentBlog } from '../actions/blog'
 import Login from '../components/pages/Login'
 
 const mapStateToProps = state => {
@@ -13,6 +13,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 
   return {
+    setCurrentBlog: id => dispatch(setCurrentBlog( id )),
     setUser: user => dispatch(setUser(user)),
     setBlogs: blogs => dispatch(setBlogs(blogs))
   }

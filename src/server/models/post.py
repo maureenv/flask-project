@@ -51,6 +51,9 @@ class Post(object):
         # For each of the elements in post_data, get the name of the data coming from the database and say that the object's element is equal to that. Only works if the object's name matches the name of the parameter in the constructor
         return cls(**post_data)
 
-    @staticmethod
-    def from_blog(id):
-        return [ post for post in Database.find(collection='posts', query={'blog_id': id}) ]
+    @classmethod
+    def from_blog(cls, id):
+        posts = Database.find(collection='posts',
+                            query={'blog_id': id})
+
+        return [ cls(**post) for post in posts ]

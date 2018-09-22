@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
+import { browserHistory } from 'react-router'
 import PropTypes from 'prop-types'
 
 
@@ -14,8 +15,12 @@ class Login extends Component {
       registerEmail: '',
       error: null,
       blogs: [],
-      user: props.user
+      user: props.user,
     }
+  }
+
+  componentWillMount() {
+    console.log( this.props, 'the props in will mount')
   }
 
   componentWillReceiveProps(nextProps) {
@@ -23,13 +28,18 @@ class Login extends Component {
   }
 
   getBlogs = () => {
-    console.log('going to get blogs')
     fetch('/blogs')
     .then(response => response.json())
-    .then(data => this.setState({ blogs: data }))
+    .then(data => this.setState({ blogs: data }, () => this.props.setBlogs(this.state.blogs)))
     .catch((err)=> console.log(err, 'the error'))
     this.props.setUser(this.state.user)
-    this.props.setBlogs(this.state.blogs)
+  }
+
+  linkToPost = (e, id) => {
+    e.preventDefault()
+        console.log('blog clicked!', id)
+    this.props.setCurrentBlog(id)
+    this.props.history.push(`blog/${ id }`)
   }
 
   submitLogin = e => {
@@ -86,10 +96,9 @@ class Login extends Component {
           <h2> Welcome { user } </h2>
           <p> Here are your blogs </p>
           { blogs.map( blog => {
-            console.log(blog, 'a single blog')
             return (
               <div>
-                <b>{ blog.title }</b>
+                <a href="#" onClick={ e => this.linkToPost( e, blog._id ) }>{ blog.title }</a>
                 <p>{ blog.author}</p>
                 <p>{ blog.description }</p>
                 <br/>
@@ -105,6 +114,7 @@ class Login extends Component {
 }
 
 Login.propTypes = {
+  setCurrentBlog: PropTypes.func,
   setUser: PropTypes.func,
   setBlogs: PropTypes.func,
   user: PropTypes.string,

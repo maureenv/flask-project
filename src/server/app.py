@@ -58,9 +58,9 @@ def user_blogs(user_id=None):
     blogs = blogs #pass in a blogs variable with the blogs content
     return jsonify([blog.json() for blog in blogs])
 
-@app.route('/posts/<string:blog_id>')
+@app.route('/posts/<string:blog_id>') # all posts have an id associated with them
 def blog_posts(blog_id):
-    blog = Blog.from_mongo(blog_id)
+    blog = Blog.get_from_mongo(blog_id)
     posts = blog.get_posts()
     posts = posts
     return jsonify([post.json() for post in posts])

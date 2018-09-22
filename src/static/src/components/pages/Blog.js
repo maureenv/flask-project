@@ -1,27 +1,35 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-//const blogs = await fetch('localhost:3000/blogs')
-// https://github.github.io/fetch/
+import PropTypes from 'prop-types'
 
-// If you're trying to send a request to localhost, and you are hosting your server on localhost, then you don't need to specify the url, you only need to tell fetch() your path.
-//
-// For example, my api end point is http://localhost:8082/api/config, then i would do fetch('/api/config').
 
 class Blog extends Component {
   state = {
-    data: null,
+    posts: []
+  }
+
+  getPosts = () => {
+    console.log('get posts called')
+    fetch(`/posts/${ this.props.currentBlog }`)
+    .then(response => response.json())
+    .then(data => this.setState({ posts: data }, () => console.log(data, 'the data')))
+    .catch((err)=> console.log(err, 'the error'))
   }
 
   componentDidMount() {
-    // fetch('/api/blog')
-    //   .then(response => response.json())
-    //   .then(data => this.setState({ data }))
+    this.getPosts()
   }
   render() {
     return (
-      <div> This is my blog </div>
+      <div> This is my blog { this.props.currentBlog }</div>
     )
   }
 }
+
+
+Blog.propTypes = {
+  currentBlog: PropTypes.string,
+}
+
 
 export default Blog

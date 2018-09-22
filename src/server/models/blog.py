@@ -56,7 +56,6 @@ class Blog(object):
     @classmethod
     def get_from_mongo(cls, id): #cls from classmethod comes from Blog, cls returns the current class
         blog_data = Database.find_one(collection='blogs', query={'_id': id})
-
         # cls is used so that if the class name is changed, we don't have to go in and change it everywhere
         # this cls returns an object that we can edit
         # return cls(author=blog_data['author'],
