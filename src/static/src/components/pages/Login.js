@@ -18,10 +18,6 @@ class Login extends Component {
     }
   }
 
-  componentWillMount() {
-    console.log(this.props, 'the props on mount')
-  }
-
   componentWillReceiveProps(nextProps) {
     console.log(nextProps, 'the nextprops')
   }
@@ -33,6 +29,7 @@ class Login extends Component {
     .then(data => this.setState({ blogs: data }))
     .catch((err)=> console.log(err, 'the error'))
     this.props.setUser(this.state.user)
+    this.props.setBlogs(this.state.blogs)
   }
 
   submitLogin = e => {
@@ -109,7 +106,8 @@ class Login extends Component {
 
 Login.propTypes = {
   setUser: PropTypes.func,
-  user: PropTypes.obj,
+  setBlogs: PropTypes.func,
+  user: PropTypes.string,
 }
 
 export default Login

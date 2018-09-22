@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink, BrowserRouter as Router, Route } from "react-router-dom"
 import { Redirect, Switch } from 'react-router'
-import Blog from './pages/Blog'
+import Blog from '../containers/Blog'
 import Home from './pages/Home'
 import Login from '../containers/Login'
 

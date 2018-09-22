@@ -7,7 +7,7 @@ const initialState = {
 }
 
 export const login = ( state = initialState, action ) => {
-  console.log(action.user, 'REDUCER')
+  console.log(action.user, 'REDUCER LOGIN')
   switch ( action.type ) {
     case 'SET_USER':
       return {
