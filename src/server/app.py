@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, jsonify
+from flask import Flask, render_template, request, session, jsonify, make_response
 from models.user import User
 from models.blog import Blog
 from common.database import Database
@@ -52,11 +52,27 @@ def user_blogs(user_id=None):
         user = User.get_by_id(user_id)
     else:
         user = User.get_by_email(session['email'])
-
+    #[{'author_id': '5b9e71fa448e75f3a7b1eadc', 'title': u'CAT', 'description': u'KITTENS', 'author': u'test@test.com'}, {'author_id': '5b9e71fa448e75f3a7b1eadc', 'title': u'DOG', 'description': u'DOG', 'author': u'test@test.com'}]
     blogs = user.get_blogs()
     print([blog.json() for blog in blogs])
     blogs = blogs #pass in a blogs variable with the blogs content
     return jsonify([blog.json() for blog in blogs])
+
+@app.route('/blogs/new', methods=['POST', 'GET'])
+def create_new_blog():
+    if request.method == 'GET':
+        return
+    else:
+        data = request.get_json()
+        title = data['title']
+        description = data['description']
+        user = User.get_by_email(session['email'])
+
+        new_blog = Blog(user.email, title, description, user._id )
+        new_blog.save_to_mongo()
+
+        return make_response(user_blogs(user._id)) # make_response calculates what user_blogs would return
+
 
 @app.route('/posts/<string:blog_id>') # all posts have an id associated with them
 def blog_posts(blog_id):

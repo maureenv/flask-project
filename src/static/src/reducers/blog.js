@@ -9,7 +9,6 @@ const initialState = {
 }
 
 export const blogs = ( state = initialState, action ) => {
-  console.log(action, 'REDUCER BLOGS')
   switch ( action.type ) {
     case 'SET_BLOGS':
       return {
