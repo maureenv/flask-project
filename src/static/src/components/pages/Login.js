@@ -52,6 +52,26 @@ class Login extends Component {
     .catch((err)=> console.log(err, 'the error'))
   }
 
+  createPost = ( e, blogId ) => {
+    e.preventDefault()
+
+    const data = {
+      content: this.state[`content${ blogId}`],
+      title: this.state[`title${ blogId}`]
+    }
+    console.log(data, 'teh data', blogId, 'the blog id')
+    fetch(`/posts/new/${blogId}`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {'Content-Type': 'application/json'},
+    })
+    .then(response => response.json())
+    .then(data => this.setState({ [`title${ blogId}`]: '', [`content${ blogId}`]: '' }))
+    .catch((err)=> console.log(err, 'the error'))
+    this.props.setCurrentBlog(blogId)
+    this.props.history.push(`blog/${ blogId }`)
+  }
+
   getBlogs = () => {
     fetch('/blogs')
     .then(response => response.json())
@@ -94,14 +114,17 @@ class Login extends Component {
   }
 
   render() {
+    console.log(this.state, 'the state')
     const {
       email,
       user,
       blogs,
       title,
       description,
+
+      postTitle,
+      postContent,
     } = this.state
-    console.log(this.state, 'the state')
     return (
       <div>
         <h2> Log In </h2>
@@ -128,6 +151,10 @@ class Login extends Component {
                 <p>{ blog.author}</p>
                 <p>{ blog.description }</p>
                 <br/>
+                <p> Add new post </p>
+                <label> Title</label><input value={ this.state[`title${ blog._id}`] } type="text" onChange={ e => this.setState({ [`title${ blog._id}`]: e.target.value })}/>
+                <label> Content</label><input value={ this.state[`content${ blog._id}`] } type="text" onChange={ e => this.setState({ [`content${ blog._id}`]: e.target.value })}/>
+                <button onClick={ e => this.createPost( e, blog._id) }>Create Post</button>
               </div>
             )
           })

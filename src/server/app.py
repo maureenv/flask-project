@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, jsonify, make_response
 from models.user import User
 from models.blog import Blog
+from models.post import Post
 from common.database import Database
 import json
 # run export FLASK_ENV=development in terminal before python run.py to see flask debugger messages
@@ -80,3 +81,18 @@ def blog_posts(blog_id):
     posts = blog.get_posts()
     posts = posts
     return jsonify([post.json() for post in posts])
+
+@app.route('/posts/new/<string:blog_id>', methods=['POST', 'GET'])
+def create_new_post(blog_id):
+    if request.method == 'GET':
+        return
+    else:
+        data = request.get_json()
+        title = data['title']
+        content = data['content']
+        user = User.get_by_email(session['email'])
+
+        new_post = Post( blog_id, title, content, user.email )
+        new_post.save_to_mongo()
+
+        return make_response(blog_posts(blog_id)) # make_response calculates what user_blogs would return
