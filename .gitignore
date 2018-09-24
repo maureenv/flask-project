@@ -8,3 +8,6 @@ node_modules
 .idea/*
 *.pyc
 tmp
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
